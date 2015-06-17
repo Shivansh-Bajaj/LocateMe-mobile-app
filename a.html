@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Locate Me</title>
+	
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="a.css">
+	<script type="text/javascript" src="test.js"></script>
+</head>
+<body>
+	<div class="navbar">
+		<a href='a.html'>
+			<div class="home selected">
+				<span class="glyphicon glyphicon-home"></span>
+			</div>
+		</a>
+
+		<a href='#'>
+			<div class="saved_locations">
+				<h2>Saved places</h2>
+			</div>
+		</a>
+
+	</div>
+		<div class='exit' onclick='window.close();' style="margin-top:10px;width:40px;background-color:#333333;float:right";>
+			<a href='#' style="color:white;">
+			<span class="glyphicon glyphicon-remove" style="margin-top:4px;"></span>
+			</a>
+		</div>
+	<div class="body1" >
+		<a href="#" onclick="geoFindMe()">
+			<div class="header" id="locateme">
+
+				<font size="6px"><b>LOCATE ME</b></font>
+		
+			</div>
+		</a>
+	<div id="out"></div>
+	<a style="text-decoration:none;" href='#'>
+		<div id="share" style="margin:10%;"></div>
+	</a>
+</div>
+</body>
+</html>
