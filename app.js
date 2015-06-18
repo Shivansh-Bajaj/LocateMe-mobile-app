@@ -15,8 +15,9 @@ function geoFindMe() {
     console.log(longitude);
 
 
-   
-    var text= 'Share this Link: <br><br><a href=https://www.google.co.in/maps/place/' + latitude+ ',' + longitude + '>https://www.google.co.in/maps/place/' + latitude+ ',' + longitude + '</a>';
+    var mapp = 'https://www.google.co.in/maps/place/'+latitude+','+longitude;
+
+    var text= 'Share this Link: <br><br><a href='+mapp+'>'+ mapp +'</a>';
     output.innerHTML=text;
     //lnk=document.getElementsByTagName('a');
     //lnk[3].setAttribute('target','_blank');
@@ -25,6 +26,24 @@ function geoFindMe() {
     share.setAttribute('class','header');
     share.innerHTML=button;
     document.getElementById('share').addEventListener('click',shareLocation);
+    var save = document.getElementById('save');
+    save.setAttribute('class','header');
+    save.innerHTML='<font size="6px"><b>SAVE</b></font>';
+    document.getElementById('save').addEventListener('click',saveLocation);
+    function saveLocation()
+    {
+      if(localStorage.file)
+      {
+        a = JSON.parse(localStorage.file);
+        a.push({'name':'halloween','map':mapp,'by':'arush'});
+        localStorage.file=JSON.stringify(a);
+      }
+      else{
+        a=[{'name':'halloween','map':mapp,'by':'arush'}];
+        localStorage.file=JSON.stringify(a);
+      }
+      alert("New location saved!");
+    }
     function shareLocation()
     /*{
       new MozActivity({
@@ -36,7 +55,7 @@ function geoFindMe() {
         }
       });
     }*/
-    window.open("sms:?body=Hii this is LocateMe!! Locate Arush Goyal%40 :-%0Ahttps://www.google.co.in/maps/place/"+latitude+','+longitude,"_self");
+    window.open("sms:?body=Hii this is LocateMe!! Locate Arush Goyal%40 :-%0A"+mapp,'_self');
   }
  function showError(error) {
     switch(error.code) {
@@ -62,6 +81,37 @@ function geoFindMe() {
     });
   }
 }
+function places()
+{
 
-
+  main = document.getElementById('main');
+  if(!!document.getElementById('body1'))
+  {
+    body1 = document.getElementById('body1');
+    main.removeChild(body1);
+  }
+  if(localStorage.file)
+  {
+    a = JSON.parse(localStorage.file);
+    space = document.createElement('div');
+    space.setAttribute('id','space');
+    main.appendChild(space);
+    for(i=0; i<a.length ; i++)
+    {
+      row = document.createElement('div');
+      row.setAttribute('class','row');
+      space.appendChild(row);
+      row.innerHTML='<div class="name col">' + a[i].name + '</div><div class="map col"><a href='+a[i].map+' target="_blank" >Map Link</a></div><div class="by col">'+a[i].by+'</div><div class="remove col" onclick="del('+i+');"><a href="#"><span class="glyphicon glyphicon-trash"></span></a></div>';
+      
+    }
+  }
+}
+function del(i)
+{
+  a.splice(i,1);
+  localStorage.file = JSON.stringify(a);
+  alert("1 Location removed!");
+  main.removeChild(space);
+  places();
+}
 

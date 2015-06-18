@@ -63,3 +63,18 @@ h2{
 	background-color: #333333;
 	color:white;
 }
+.row{
+	display : flex;
+	border:solid 2px;
+	border-bottom: solid 1px;
+	padding:4px;
+}
+.col{
+	width:25%;
+	text-align: center;
+	padding-top: 7px;
+}
+#space{
+	margin-top:70px;
+	border-bottom: solid 1px;
+}

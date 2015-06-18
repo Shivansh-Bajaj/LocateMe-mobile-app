@@ -8,16 +8,16 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="app.js"></script>
 </head>
-<body>
+<body id="main">
 	<div class="navbar">
-		<a href='a.html'>
+		<a href='index.html' id="home">
 			<div class="home selected">
 				<span class="glyphicon glyphicon-home"></span>
 			</div>
 		</a>
 
-		<a href='#'>
-			<div class="saved_locations">
+		<a href='#' id="loc">
+			<div class="saved_locations" onclick="places()" >
 				<h2>Saved places</h2>
 			</div>
 		</a>
@@ -28,7 +28,7 @@
 			<span class="glyphicon glyphicon-remove" style="margin-top:4px;"></span>
 			</a>
 		</div>
-	<div class="body1" >
+	<div class="body1" id="body1">
 		<a href="#" onclick="geoFindMe()">
 			<div class="header" id="locateme">
 
@@ -36,10 +36,15 @@
 		
 			</div>
 		</a>
-	<div id="out"></div>
-	<a style="text-decoration:none;" href='#'>
-		<div id="share" style="margin:10%;"></div>
-	</a>
+		<div id="out"></div>
+		<a style="text-decoration:none;" href='#'>
+			<div id="share" style="margin:0%;"></div>
+		</a>
+		<a style="text-decoration:none;" href='#'>
+			<div id="save" style="margin:0%;"></div>
+		</a>
+
+	</div>
 </div>
 </body>
 </html>
