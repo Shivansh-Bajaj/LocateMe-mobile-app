@@ -32,17 +32,27 @@ function geoFindMe() {
     document.getElementById('save').addEventListener('click',saveLocation);
     function saveLocation()
     {
-      if(localStorage.file)
+      var place = prompt("Please Enter a valid the Location name","My place");
+      if (place!=null)
       {
-        a = JSON.parse(localStorage.file);
-        a.push({'name':'halloween','map':mapp,'by':'arush'});
-        localStorage.file=JSON.stringify(a);
+        if(place=="")
+        {
+          saveLocation();
+        }
+        else{
+          if(localStorage.file)
+          {
+            a = JSON.parse(localStorage.file);
+            a.push({'name':place ,'map':mapp});
+            localStorage.file=JSON.stringify(a);
+          }
+          else{
+            a=[{'name':place,'map':mapp}];
+            localStorage.file=JSON.stringify(a);
+          }
+          alert("New location saved!");
+        }
       }
-      else{
-        a=[{'name':'halloween','map':mapp,'by':'arush'}];
-        localStorage.file=JSON.stringify(a);
-      }
-      alert("New location saved!");
     }
     function shareLocation()
     /*{
@@ -81,14 +91,23 @@ function geoFindMe() {
     });
   }
 }
+function share1(name,map)
+{
+  window.open("sms:?body=Hii this is LocateMe!! Locate "+name+"%40 :-%0A"+map ,'_self');
+}
 function places()
 {
-
+  document.getElementById('loc').setAttribute('class','saved_locations selected');
+  document.getElementById('home').setAttribute('class','home');
   main = document.getElementById('main');
   if(!!document.getElementById('body1'))
   {
     body1 = document.getElementById('body1');
     main.removeChild(body1);
+  }
+  if(!!document.getElementById('space'))
+  {
+    main.removeChild(space);
   }
   if(localStorage.file)
   {
@@ -101,17 +120,20 @@ function places()
       row = document.createElement('div');
       row.setAttribute('class','row');
       space.appendChild(row);
-      row.innerHTML='<div class="name col">' + a[i].name + '</div><div class="map col"><a href='+a[i].map+' target="_blank" >Map Link</a></div><div class="by col">'+a[i].by+'</div><div class="remove col" onclick="del('+i+');"><a href="#"><span class="glyphicon glyphicon-trash"></span></a></div>';
+      row.innerHTML='<div class="name col">' + a[i].name + '</div><div class="map col"><a href='+a[i].map+' target="_blank" >Map Link</a></div><div class="share col"><a href="#" onclick="share1(\''+a[i].name+'\',\''+a[i].map+'\');"><span class="glyphicon glyphicon-envelope"></span></a></div><div class="remove col" onclick="del('+i+');"><a href="#"><span class="glyphicon glyphicon-trash"></span></a></div>';
       
     }
   }
 }
+
 function del(i)
 {
-  a.splice(i,1);
-  localStorage.file = JSON.stringify(a);
-  alert("1 Location removed!");
-  main.removeChild(space);
-  places();
+  if(confirm("Are you sure you want to delete Location "+a[i].name+"?"))
+  {
+    a.splice(i,1);
+    localStorage.file = JSON.stringify(a);
+    main.removeChild(space);
+    places();
+  }
 }
 
