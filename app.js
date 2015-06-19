@@ -8,66 +8,72 @@ function geoFindMe() {
   }
   else{
     
-  function success(position) {
-    var latitude  = position.coords.latitude;
-    var longitude = position.coords.longitude;
-    console.log(latitude);
-    console.log(longitude);
+    function success(position) {
+      var latitude  = position.coords.latitude;
+      var longitude = position.coords.longitude;
+      console.log(latitude);
+      console.log(longitude);
 
 
-    var mapp = 'https://www.google.co.in/maps/place/'+latitude+','+longitude;
+      var mapp = 'https://www.google.co.in/maps/place/'+latitude+','+longitude;
 
-    var text= 'Share this Link: <br><br><a href='+mapp+'>'+ mapp +'</a>';
-    output.innerHTML=text;
-    //lnk=document.getElementsByTagName('a');
-    //lnk[3].setAttribute('target','_blank');
-    var button='<font size="6px"><b>SHARE</b></font>'
-    var share=document.getElementById('share');
-    share.setAttribute('class','header');
-    share.innerHTML=button;
-    document.getElementById('share').addEventListener('click',shareLocation);
-    var save = document.getElementById('save');
-    save.setAttribute('class','header');
-    save.innerHTML='<font size="6px"><b>SAVE</b></font>';
-    document.getElementById('save').addEventListener('click',saveLocation);
-    function saveLocation()
-    {
-      var place = prompt("Please Enter a valid the Location name","My place");
-      if (place!=null)
+      var text= 'Share this Link: <br><br><a href='+mapp+'>'+ mapp +'</a>';
+      output.innerHTML=text;
+      //lnk=document.getElementsByTagName('a');
+      //lnk[3].setAttribute('target','_blank');
+      var button='<font size="6px"><b>SHARE</b></font>'
+      var share=document.getElementById('share');
+      share.setAttribute('class','header');
+      share.innerHTML=button;
+      document.getElementById('share').addEventListener('click',shareLocation);
+      var save = document.getElementById('save');
+      save.setAttribute('class','header');
+      save.innerHTML='<font size="6px"><b>SAVE</b></font>';
+      document.getElementById('save').addEventListener('click',saveLocation);
+      function saveLocation()
       {
-        if(place=="")
+        var place = prompt("Please Enter a valid the Location name","My place");
+        if (place!=null)
         {
-          saveLocation();
-        }
-        else{
-          if(localStorage.file)
+          if(place=="")
           {
-            a = JSON.parse(localStorage.file);
-            a.push({'name':place ,'map':mapp});
-            localStorage.file=JSON.stringify(a);
+            saveLocation();
           }
           else{
-            a=[{'name':place,'map':mapp}];
-            localStorage.file=JSON.stringify(a);
+            if(localStorage.file)
+            {
+              a = JSON.parse(localStorage.file);
+              a.push({'name':place ,'map':mapp});
+              localStorage.file=JSON.stringify(a);
+            }
+            else{
+              a=[{'name':place,'map':mapp}];
+              localStorage.file=JSON.stringify(a);
+            }
+            alert("New location saved!");
           }
-          alert("New location saved!");
         }
       }
+      function shareLocation()
+      {
+      /*{
+        new MozActivity({
+          name: 'new',
+          data: {
+            type: 'websms/sms',
+            number:'',
+            body: "Hi this is LocateME.To view the the location of your friend Arush open this link<br>"
+          }
+        });
+      }*/
+      var name = prompt("Whats your name?","name");
+      if (name!=null){
+
+        window.open("sms:?body=Hii this is LocateMe!! Locate "+ name +" %40 :-%0A"+mapp,'_self');
+      }
     }
-    function shareLocation()
-    /*{
-      new MozActivity({
-        name: 'new',
-        data: {
-          type: 'websms/sms',
-          number:'',
-          body: "Hi this is LocateME.To view the the location of your friend Arush open this link<br>"
-        }
-      });
-    }*/
-    window.open("sms:?body=Hii this is LocateMe!! Locate Arush Goyal%40 :-%0A"+mapp,'_self');
   }
- function showError(error) {
+  function showError(error) {
     switch(error.code) {
         case error.PERMISSION_DENIED:
             output.innerHTML = "User denied the request for Geolocation."
@@ -81,8 +87,8 @@ function geoFindMe() {
         case error.UNKNOWN_ERROR:
             output.innerHTML = "An unknown error occurred."
             break;
-      }
-   } 
+    }
+  } 
 
   
   output.innerHTML = "<p>Locating...</p>";
