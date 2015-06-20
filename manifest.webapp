@@ -1,7 +1,7 @@
 {
   "name": "LocateMe",
-  "description": "This app find out your current position and sends an sms to your friends",
-  "launch_path": "/index.html",
+  "description": "A Hello World app",
+  "launch_path": "/app.html",
   "icons": {
     "16": "/icons/icon16x16.png",
     "48": "/icons/icon48x48.png",
@@ -9,13 +9,10 @@
     "128": "/icons/icon128x128.png"
   },
   "developer": {
-    "name": "Arush Goyal",
-    "url": "https://github.com/arush0311"
+    "name": "Your name",
+    "url": "http://example.com"
   },
-    "chrome": {
-      "navigation": true
-    },
-    "permissions": {
+        "permissions": {
      "geolocation": {
          "description" : "Used to locate you"
        },
@@ -23,4 +20,5 @@
 		  "description": "Required to make Network calls" 
 	    }
     }
+  
 }
