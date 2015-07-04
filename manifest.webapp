@@ -1,6 +1,6 @@
 {
   "name": "LocateMe",
-  "description": "A Hello World app",
+  "description": "Get,share and save your location instantly. Anytime anywhere..",
   "launch_path": "/app.html",
   "icons": {
     "16": "/icons/icon16x16.png",
@@ -8,17 +8,15 @@
     "60": "/icons/icon60x60.png",
     "128": "/icons/icon128x128.png"
   },
+  "chrome": {"navigation": true},
   "developer": {
-    "name": "Your name",
-    "url": "http://example.com"
+    "name": "Arush Goyal",
+    "url": "https://github.com/arush0311"
   },
         "permissions": {
      "geolocation": {
          "description" : "Used to locate you"
-       },
-	"systemXHR": { 
-		  "description": "Required to make Network calls" 
-	    }
+       }
     }
   
 }

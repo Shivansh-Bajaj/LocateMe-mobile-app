@@ -1,5 +1,12 @@
+.container{
+	width:99%;
+}
+body{
+	margin:0;
+}
 .btn-large{
 	width:100%;
+	
 }
 .lme{
 	margin-top: 20%;
@@ -17,4 +24,8 @@
 }
 .progress{
 	margin-top: 10%;
+}
+.collection,.collection-item{
+	border:0px;
+	border-bottom: 0px;
 }
